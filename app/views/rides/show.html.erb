@@ -1,0 +1,38 @@
+<h1>Rides#show</h1>
+<p>Find me in app/views/rides/show.html.erb</p>
+
+
+<div id="map" style="height: 500px;"></div>
+<script>
+	document.addEventListener("turbo:load", () => {
+		const map = L.map('map').setView([51.505, -0.09], 13)
+
+		L.tileLayer('https://{s}.title.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributor'
+		}).addTo(map)
+
+		//function to update driver and passager locations
+		function updateMarkers(){
+			fetch('/rides/<%= @ride.id %>')
+				.then(response => response.json())
+				.then(data = {
+					const driver = data.driver
+					const passenger = data.passenger
+
+					// Remove existing markers 
+					if (window.driverMarker) map.removeLayer(window.driverMarker)
+					if (window.passengerMarker) map.removeLayer(window.passengerMarker)
+
+					// Add new marker
+
+					window.driverMarker = L.marker([driver.latitude, driver.longitude]).addTo(map)
+					window.passengerMarker = L.marker([passenger.latitude, passenger.longitude]).addTo(map)
+
+				})
+		}
+
+		updateMarkers()
+		setInterval(updateMarkers, 5000)
+	})
+
+</script>

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pickup_location: MyString
+  dropoff_location: MyString
+  passenger: one
+  driver: one
+  status: MyString
+  price: 9.99
+
+two:
+  pickup_location: MyString
+  dropoff_location: MyString
+  passenger: two
+  driver: two
+  status: MyString
+  price: 9.99
